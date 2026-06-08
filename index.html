@@ -57,7 +57,7 @@ button {
 
 /* 顶部绿色导航 */
 .header-green {
-  background-color: #36c87a;
+  background-color: skyblue;
   padding: 16px 14px;
   position: sticky;
   top: 0;
@@ -380,7 +380,7 @@ button {
     <div class="header-top-row">
       <div class="flex items-center">
         <i class="fa fa-bars menu-icon"></i>
-        <div class="logo-yupoo">yupoo</div>
+        <div class="logo-yupoo">日晖鞋业</div>
       </div>
       <div class="header-right-text">
         <span>登录</span>
@@ -396,11 +396,9 @@ button {
   </header>
 
   <div class="nav-category">
-    <h1 class="shop-name">潮鞋</h1>
+    <h1 class="shop-name">日晖鞋业(工厂直销 高端鞋业)</h1>
     <div class="tab-list">
       <span class="tab-item tab-active">首页</span>
-      <span class="tab-item">相册</span>
-      <span class="tab-item tab-dropdown">全部分类 <i class="fa fa-caret-down text-sm"></i></span>
     </div>
   </div>
 
@@ -427,10 +425,7 @@ button {
         <h2 id="detailMainTitle" class="detail-main-title"></h2>
         <p id="detailDescText" class="detail-desc-text"></p>
         <div class="detail-btn-group">
-          <button class="btn-green-border" onclick="copyGoodsText()">申请复制</button>
-          <button class="btn-green-border">申请下载</button>
-          <button class="btn-green-border">分享</button>
-          <button class="btn-gray-border">详细</button>
+          <button class="btn-green-border" onclick="copyGoodsText()">复制</button> 
         </div>
       </div>
     </div>
@@ -448,42 +443,132 @@ button {
 // 商品数据
 const goodsData = [
   {
-    id: "CH112",
-    shortTitle: "CH112#p55Ch...",
-    fullTitle: "CH112#p55Chrome Hearts克罗心26新款荧光绿马蹄梵文印花男女短袖T恤",
-    searchKey: "CH112 克罗心 荧光绿 马蹄",
+    id: "",
+    shortTitle: "Dior男士皮鞋",
+    fullTitle: "Dior男士皮鞋采用进口头层牛皮",
     coverImg: "./img/a1.jpg",
-    desc: `CH112#p55Chrome Hearts克罗心26新款荧光绿马蹄梵文印花男女短袖T恤，260g纯棉材质，柔软透气，夏天穿超舒服！胸前荧光绿马蹄印花+袖口品牌标识，哥特风满满，辨识度超高✨。宽松版型，男女都能轻松驾驭，日常出街、街头风、潮流穿搭都很适合，随便搭牛仔裤或工装裤，轻松get高街感！🔥
-款号：CH112#
-码数：S-XL
-颜色：黑色/白色`,
+    desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+size：38-44（45.46定制）
+p: 500
+码数：38-44(45.46定制)`,
     detailImgs: [
-      {src:"./img/a2.jpg",name:"DSC00838 - 副本...",time:"2026-05-27"},
-      {src:"./img/a3.jpg",name:"DSC00855.jpg",time:"2026-05-27"},
-      {src:"./img/a4.jpg",name:"DSC00863.jpg",time:"2026-05-27"},
-      {src:"./img/a5.jpg",name:"DSC00867.jpg",time:"2026-05-27"},
-      {src:"./img/a6.jpg",name:"DSC00858.jpg",time:"2026-05-27"},
-      {src:"./img/a7.jpg",name:"DSC00857.jpg",time:"2026-05-27"}
+      {src:"./img/a2.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+      {src:"./img/a3.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+      {src:"./img/a4.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+      {src:"./img/a5.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+      {src:"./img/a6.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+      {src:"./img/a7.jpg",name:"Dior男士皮鞋",time:"2026-05-19"}
     ]
   },
   {
-    id: "LYW225",
-    shortTitle: "LYW225P65#...",
-    fullTitle: "LYW225P65青蛙印花潮牌短袖T恤",
-    searchKey: "LYW225 青蛙 印花",
-    coverImg: "https://picsum.photos/id/110/300/300",
-    desc: "彩色青蛙印花短袖，65支高支棉，宽松落肩版型，黑白双色，小众街头设计，男女同款。",
-    detailImgs: [{src:"https://picsum.photos/id/110/600/600",name:"DSC001.jpg",time:"2026-05-27"}]
+    id: "",
+   shortTitle: "Dior男士皮鞋",
+   fullTitle: "Dior男士皮鞋采用进口头层牛皮",
+    coverImg: "./img/a10.jpg",
+    desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+size：38-44（45.46定制）
+p: 500
+码数：38-44(45.46定制)`,
+    detailImgs: [
+		{src:"./img/a10.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a11.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a12.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a13.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a14.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a15.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a16.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a17.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a18.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		
+		]
   },
   {
-    id: "LYW226",
-    shortTitle: "LYW225P65#...",
-    fullTitle: "LYW225P65青蛙印花潮牌短袖T恤",
-    searchKey: "LYW225 青蛙 印花",
-    coverImg: "./img/a2.jpg",
-    desc: "彩色青蛙印花短袖，65支高支棉，宽松落肩版型，黑白双色，小众街头设计，男女同款。",
-    detailImgs: [{src:"https://picsum.photos/id/110/600/600",name:"DSC001.jpg",time:"2026-05-27"}]
-  }
+    id: "",
+   shortTitle: "Dior男士皮鞋",
+   fullTitle: "Dior男士皮鞋采用进口头层牛皮",
+    coverImg: "./img/a20.jpg",
+    desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+size：38-44（45.46定制）
+p: 500
+码数：38-44(45.46定制)`,
+    detailImgs: [
+		{src:"./img/a19.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a20.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a21.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a22.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a23.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a24.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a25.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a26.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		{src:"./img/a27.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+		]
+  },
+  
+  {
+      id: "",
+     shortTitle: "Dior男士皮鞋",
+     fullTitle: "Dior男士皮鞋采用进口头层牛皮",
+      coverImg: "./img/a28.jpg",
+      desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+  size：38-44（45.46定制）
+  p: 500
+  码数：38-44(45.46定制)`,
+      detailImgs: [
+  		{src:"./img/a28.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a29.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a30.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a31.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a32.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a33.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a34.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a35.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		{src:"./img/a36.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+  		]
+    },
+	
+	{
+	    id: "",
+	   shortTitle: "Dior男士皮鞋",
+	   fullTitle: "Dior男士皮鞋采用进口头层牛皮",
+	    coverImg: "./img/a37.jpg",
+	    desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+	size：38-44（45.46定制）
+	p: 500
+	码数：38-44(45.46定制)`,
+	    detailImgs: [
+			{src:"./img/a38.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a39.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a40.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a41.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a42.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a43.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a44.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a45.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			{src:"./img/a37.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+			]
+	  },
+	  
+	  {
+	      id: "",
+	     shortTitle: "Dior男士皮鞋",
+	     fullTitle: "Dior男士皮鞋采用进口头层牛皮",
+	      coverImg: "./img/a46.jpg",
+	      desc: `Dior男士皮鞋采用进口头层牛皮，鞋面搭配经典老花图案，品牌辨识度超高✨。内里和垫脚均为小牛皮，吸汗透气，长时间穿也很舒适。鞋底用进口真皮胚层，韧性好又透气，缓解脚部疲劳。整体设计简约大方，商务或休闲都能轻松驾驭
+	  size：38-44（45.46定制）
+	  p: 500
+	  码数：38-44(45.46定制)`,
+	      detailImgs: [
+	  		{src:"./img/a46.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a47.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a48.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a49.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a50.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a51.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a52.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a53.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		{src:"./img/a54.jpg",name:"Dior男士皮鞋",time:"2026-05-19"},
+	  		]
+	    }
 ];
 
 let currentGoods = null;
