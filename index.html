@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>潮鞋</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/index.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        mainGreen: '#36c87a',
+        grayBar: '#d6d9dc',
+        textGray: '#666'
+      }
+    }
+  }
+}
+</script>
+<style>
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #f7f8f9;
+  font-family: system-ui, -apple-system, "PingFang SC", sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.scroll-hide::-webkit-scrollbar { display: none; }
+.scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 页面切换核心 */
+#pageHome, #pageDetail {
+  width: 100%;
+  min-height: 100vh;
+}
+.hide-page {
+  display: none !important;
+}
+
+/* 顶部绿色导航 */
+.header-green {
+  background-color: #36c87a;
+  padding: 16px 14px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+.header-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.logo-yupoo {
+  font-size: 42px;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+}
+.header-right-text {
+  display: flex;
+  gap: 24px;
+  color: white;
+  font-size: 18px;
+  align-items: center;
+}
+.menu-icon {
+  color: white;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* 搜索栏 */
+.search-wrap {
+  display: flex;
+  background: white;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.search-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+.search-icon-camera {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  color: #999;
+}
+.search-btn {
+  background: #36c87a;
+  color: white;
+  padding: 0 22px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 首页分类 */
+.nav-category {
+  background: #fff;
+  padding: 18px 14px;
+  border-bottom: 1px solid #eee;
+}
+.shop-name {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 12px;
+}
+.tab-list {
+  display: flex;
+  gap: 32px;
+  font-size: 19px;
+}
+.tab-item {
+  color: #666;
+  padding-bottom: 4px;
+  cursor: pointer;
+}
+.tab-active {
+  color: #36c87a;
+  border-bottom: 2px solid #36c87a;
+}
+.tab-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 公告栏 */
+.notice-bar {
+  background: #fff;
+  text-align: center;
+  padding: 22px 10px;
+  color: #666;
+  font-size: 17px;
+}
+
+/* 商品卡片 全部区域统一点击跳转详情 */
+.goods-card {
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.card-title-text {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #444;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 10px;
+}
+.pb-24 {
+  padding-bottom: 96px;
+}
+
+/* 分页箭头 */
+.page-control {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  padding: 30px 0;
+  font-size: 26px;
+  color: #bbbbbb;
+  background: #fff;
+  margin-top: 12px;
+}
+
+/* 详情页头部 */
+.detail-header {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 16px 14px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+.detail-back-icon {
+  font-size: 22px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+.detail-page-title {
+  font-size: 18px;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 详情信息区 */
+.detail-info-box {
+  background: #fff;
+  padding: 16px 14px;
+}
+.detail-top-img-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.detail-small-preview {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.detail-main-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.detail-desc-text {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* 详情按钮 */
+.detail-btn-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-green-border {
+  border: 1px solid #36c87a;
+  color: #36c87a;
+  padding: 9px 26px;
+  border-radius: 999px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn-gray-border {
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 9px 26px;
+  border-radius: 999px;
+  font-size: 16px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+/* 详情图片网格 */
+.detail-img-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px 10px;
+  background: #f7f8f9;
+}
+.img-bottom-text {
+  font-size: 14px;
+  color: #777;
+  padding: 6px 4px;
+}
+
+/* 全屏轮播弹窗（仅详情页图片可用） */
+.img-carousel-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+.carousel-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: #fff;
+  font-size: 32px;
+  z-index: 10;
+  cursor: pointer;
+}
+.carousel-track-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.carousel-track {
+  height: 100%;
+  display: flex;
+  transition: transform 0.2s ease-out;
+}
+.carousel-item {
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.carousel-item img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+.carousel-prev, .carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 36px;
+  padding: 10px 16px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px 0 30px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #666;
+}
+.dot.active { background: #fff; }
+</style>
+</head>
+<body class="scroll-hide">
+<!-- 图片轮播弹窗 -->
+<div id="imgCarouselModal" class="img-carousel-modal hide-page">
+  <i class="fa fa-times carousel-close" onclick="closeCarousel()"></i>
+  <div class="carousel-track-wrap" id="trackWrap">
+    <div class="carousel-track" id="carouselTrack"></div>
+    <i class="fa fa-angle-left carousel-prev" onclick="prevImage()"></i>
+    <i class="fa fa-angle-right carousel-next" onclick="nextImage()"></i>
+  </div>
+  <div class="carousel-dots" id="dotsBox"></div>
+</div>
+
+<!-- 首页页面 -->
+<div id="pageHome">
+  <header class="header-green">
+    <div class="header-top-row">
+      <div class="flex items-center">
+        <i class="fa fa-bars menu-icon"></i>
+        <div class="logo-yupoo">yupoo</div>
+      </div>
+      <div class="header-right-text">
+        <span>登录</span>
+        <span>注册</span>
+        <i class="fa fa-globe"></i>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input id="searchInput" class="search-input" placeholder="搜索相册/图片">
+      <span class="search-icon-camera"><i class="fa fa-camera"></i></span>
+      <button class="search-btn" onclick="triggerSearch()">搜索</button>
+    </div>
+  </header>
+
+  <div class="nav-category">
+    <h1 class="shop-name">潮鞋</h1>
+    <div class="tab-list">
+      <span class="tab-item tab-active">首页</span>
+      <span class="tab-item">相册</span>
+      <span class="tab-item tab-dropdown">全部分类 <i class="fa fa-caret-down text-sm"></i></span>
+    </div>
+  </div>
+
+
+  <div id="goodsListBox" class="grid-3 pb-24"></div>
+
+  <div class="page-control">
+    <i class="fa fa-chevron-left"></i>
+    <i class="fa fa-chevron-right"></i>
+  </div>
+</div>
+
+<!-- 详情页面 默认隐藏 -->
+<div id="pageDetail" class="hide-page">
+  <div class="detail-header">
+    <i class="fa fa-times detail-back-icon" onclick="backToHome()"></i>
+    <div id="detailPageTitle" class="detail-page-title"></div>
+    <i class="fa fa-ellipsis-h text-xl"></i>
+  </div>
+  <div class="detail-info-box">
+    <div class="detail-top-img-row">
+      <img id="detailTopSmallImg" class="detail-small-preview">
+      <div class="flex-1">
+        <h2 id="detailMainTitle" class="detail-main-title"></h2>
+        <p id="detailDescText" class="detail-desc-text"></p>
+        <div class="detail-btn-group">
+          <button class="btn-green-border" onclick="copyGoodsText()">申请复制</button>
+          <button class="btn-green-border">申请下载</button>
+          <button class="btn-green-border">分享</button>
+          <button class="btn-gray-border">详细</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="detailImageBox" class="detail-img-grid"></div>
+
+  <div class="page-control">
+    <i class="fa fa-chevron-left"></i>
+    <i class="fa fa-chevron-right"></i>
+  </div>
+</div>
+
+<script>
+// 商品数据
+const goodsData = [
+  {
+    id: "CH112",
+    shortTitle: "CH112#p55Ch...",
+    fullTitle: "CH112#p55Chrome Hearts克罗心26新款荧光绿马蹄梵文印花男女短袖T恤",
+    searchKey: "CH112 克罗心 荧光绿 马蹄",
+    coverImg: "./img/a1.jpg",
+    desc: `CH112#p55Chrome Hearts克罗心26新款荧光绿马蹄梵文印花男女短袖T恤，260g纯棉材质，柔软透气，夏天穿超舒服！胸前荧光绿马蹄印花+袖口品牌标识，哥特风满满，辨识度超高✨。宽松版型，男女都能轻松驾驭，日常出街、街头风、潮流穿搭都很适合，随便搭牛仔裤或工装裤，轻松get高街感！🔥
+款号：CH112#
+码数：S-XL
+颜色：黑色/白色`,
+    detailImgs: [
+      {src:"./img/a2.jpg",name:"DSC00838 - 副本...",time:"2026-05-27"},
+      {src:"./img/a3.jpg",name:"DSC00855.jpg",time:"2026-05-27"},
+      {src:"./img/a4.jpg",name:"DSC00863.jpg",time:"2026-05-27"},
+      {src:"./img/a5.jpg",name:"DSC00867.jpg",time:"2026-05-27"},
+      {src:"./img/a6.jpg",name:"DSC00858.jpg",time:"2026-05-27"},
+      {src:"./img/a7.jpg",name:"DSC00857.jpg",time:"2026-05-27"}
+    ]
+  },
+  {
+    id: "LYW225",
+    shortTitle: "LYW225P65#...",
+    fullTitle: "LYW225P65青蛙印花潮牌短袖T恤",
+    searchKey: "LYW225 青蛙 印花",
+    coverImg: "https://picsum.photos/id/110/300/300",
+    desc: "彩色青蛙印花短袖，65支高支棉，宽松落肩版型，黑白双色，小众街头设计，男女同款。",
+    detailImgs: [{src:"https://picsum.photos/id/110/600/600",name:"DSC001.jpg",time:"2026-05-27"}]
+  },
+  {
+    id: "LYW226",
+    shortTitle: "LYW225P65#...",
+    fullTitle: "LYW225P65青蛙印花潮牌短袖T恤",
+    searchKey: "LYW225 青蛙 印花",
+    coverImg: "./img/a2.jpg",
+    desc: "彩色青蛙印花短袖，65支高支棉，宽松落肩版型，黑白双色，小众街头设计，男女同款。",
+    detailImgs: [{src:"https://picsum.photos/id/110/600/600",name:"DSC001.jpg",time:"2026-05-27"}]
+  }
+];
+
+let currentGoods = null;
+let carouselImgList = [];
+let currentIndex = 0;
+let touchStartX = 0;
+let touchMoveX = 0;
+let trackDom = null;
+let trackWrapDom = null;
+
+// 打开详情页 核心跳转函数
+function openDetail(item) {
+  console.log("点击卡片，跳转商品：", item.fullTitle);
+  currentGoods = item;
+  // 隐藏首页、显示详情
+  document.getElementById("pageHome").classList.add("hide-page");
+  document.getElementById("pageDetail").classList.remove("hide-page");
+
+  // 填充文字内容
+  document.getElementById("detailPageTitle").innerText = item.fullTitle;
+  document.getElementById("detailTopSmallImg").src = item.coverImg;
+  document.getElementById("detailMainTitle").innerText = item.fullTitle + " | " + item.id;
+  document.getElementById("detailDescText").innerText = item.desc;
+
+  // 渲染详情图片列表（详情图片点击才会全屏轮播）
+  const imgBox = document.getElementById("detailImageBox");
+  imgBox.innerHTML = "";
+  item.detailImgs.forEach((imgObj, idx) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <img src="${imgObj.src}" class="card-img">
+      <div class="img-bottom-text">
+        <div>${imgObj.name}</div>
+        <div>${imgObj.time}</div>
+      </div>
+    `;
+    div.querySelector("img").onclick = function(e){
+      e.stopPropagation();
+      const arr = item.detailImgs.map(d=>d.src);
+      openCarousel(arr, idx);
+    };
+    imgBox.appendChild(div);
+  });
+  window.scrollTo(0, 0);
+}
+
+// 返回首页
+function backToHome() {
+  console.log("返回首页");
+  document.getElementById("pageHome").classList.remove("hide-page");
+  document.getElementById("pageDetail").classList.add("hide-page");
+  currentGoods = null;
+  window.scrollTo(0,0);
+}
+
+// 渲染首页商品卡片（修改重点：删除图片单独点击放大逻辑，整张卡片包含图片全部统一跳转详情）
+function renderList(list = goodsData) {
+  const wrap = document.getElementById("goodsListBox");
+  wrap.innerHTML = "";
+  list.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "goods-card";
+    // 整卡片包含图片、文字全部区域点击跳转详情
+    card.addEventListener("click", function(){
+      openDetail(item);
+    });
+    // 仅渲染图片和文字，不再给图片绑定单独放大事件
+    card.innerHTML = `
+      <img src="${item.coverImg}" class="card-img">
+      <div class="card-title-text">${item.shortTitle}</div>
+    `;
+    wrap.appendChild(card);
+  });
+}
+
+// 图片轮播（仅详情页面图片可用）
+function openCarousel(imgArr, startIdx) {
+  carouselImgList = imgArr;
+  currentIndex = startIdx;
+  const modal = document.getElementById("imgCarouselModal");
+  trackDom = document.getElementById("carouselTrack");
+  trackWrapDom = document.getElementById("trackWrap");
+  const dotsBox = document.getElementById("dotsBox");
+  trackDom.innerHTML = "";
+  dotsBox.innerHTML = "";
+  imgArr.forEach(src => {
+    const item = document.createElement("div");
+    item.className = "carousel-item";
+    item.innerHTML = `<img src="${src}">`;
+    trackDom.appendChild(item);
+  });
+  imgArr.forEach((_,i) => {
+    const dot = document.createElement("span");
+    dot.className = `dot ${i===currentIndex ? "active" : ""}`;
+    dotsBox.appendChild(dot);
+  });
+  updateCarousel();
+  modal.classList.remove("hide-page");
+  bindTouch();
+}
+function closeCarousel() {
+  document.getElementById("imgCarouselModal").classList.add("hide-page");
+}
+function updateCarousel() {
+  const offset = -currentIndex * window.innerWidth;
+  trackDom.style.transform = `translateX(${offset}px)`;
+  document.querySelectorAll(".dot").forEach((dot,i)=>dot.classList.toggle("active",i===currentIndex));
+}
+function prevImage() {
+  if(currentIndex <=0) return;
+  currentIndex--;
+  updateCarousel();
+}
+function nextImage() {
+  if(currentIndex >= carouselImgList.length-1) return;
+  currentIndex++;
+  updateCarousel();
+}
+function bindTouch() {
+  trackWrapDom.addEventListener("touchstart", e=>{
+    touchStartX = e.touches[0].clientX;
+  });
+  trackWrapDom.addEventListener("touchmove", e=>{
+    touchMoveX = e.touches[0].clientX;
+    const diff = touchMoveX - touchStartX;
+    const base = -currentIndex * window.innerWidth;
+    trackDom.style.transition = "none";
+    trackDom.style.transform = `translateX(${base + diff}px)`;
+  });
+  trackWrapDom.addEventListener("touchend", ()=>{
+    trackDom.style.transition = "transform 0.2s ease-out";
+    const diff = touchMoveX - touchStartX;
+    if(Math.abs(diff) > 50) diff>0 ? prevImage() : nextImage();
+    else updateCarousel();
+    touchStartX = touchMoveX = 0;
+  });
+}
+
+// 复制文案
+async function copyGoodsText() {
+  if(!currentGoods) return;
+  try{
+    await navigator.clipboard.writeText(currentGoods.desc);
+    alert("复制成功！");
+  }catch{
+    const t = document.createElement("textarea");
+    t.value = currentGoods.desc;
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand("copy");
+    document.body.removeChild(t);
+    alert("复制成功！");
+  }
+}
+
+// 搜索
+function triggerSearch() {
+  const key = document.getElementById("searchInput").value.trim().toLowerCase();
+  if(!key) return renderList(goodsData);
+  const filter = goodsData.filter(item=>
+    item.fullTitle.toLowerCase().includes(key) || item.searchKey.toLowerCase().includes(key)
+  );
+  if(filter.length === 0) return alert("未找到商品");
+  if(filter.length === 1) openDetail(filter[0]);
+  else renderList(filter);
+}
+document.getElementById("searchInput").addEventListener("keydown", e=>{
+  if(e.key === "Enter") triggerSearch();
+});
+
+// 页面加载完成渲染商品
+window.addEventListener("DOMContentLoaded", function(){
+  renderList();
+});
+</script>
+</body>
+</html>
